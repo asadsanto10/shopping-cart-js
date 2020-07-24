@@ -44,10 +44,10 @@ decrementItem2.addEventListener('click', function () {
 
 // cart remove function
 document.getElementById('closeItem1').addEventListener('click', function () {
-    removeCart('item-1');
+    removeCart('item-1', 'defultItemPrice1');
 });
 document.getElementById('closeItem2').addEventListener('click', function () {
-    removeCart('item-2');
+    removeCart('item-2', 'defultItemPrice2');
 });
 
 // incremenent decrement function
@@ -73,8 +73,9 @@ function incrementDecrement(inputItemvale, defultItemPriceAmount, type) {
 
 
 // cart remove function
-function removeCart(remobeCartId) {
+function removeCart(remobeCartId, ItemPrice1) {
     document.getElementById(remobeCartId).style.display = 'none';
+    document.getElementById(ItemPrice1).innerText = 0;
     subtotal();
 }
 
@@ -89,4 +90,35 @@ function subtotal() {
     document.getElementById('totalAmount').innerText = subtotal + vat;
 
 }
+
+// hide cart section and show customer details show
+document.getElementById('checkOutBtn').addEventListener('click', function() { 
+    //showHide('customerDetails', 'cart');
+    document.getElementById('cart').classList.add('d-none');
+    document.getElementById('customerDetails').classList.remove('d-none');
+});
+
+// Delivery Details Submit 
+const deliveryDetailsForm = document.getElementById('deliveryDetailsForm');
+deliveryDetailsForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    // Printing Invoice Customer Details 
+    document.getElementById("showCustomerName").innerText = deliveryDetailsForm.customerName.value;
+    document.getElementById("showCustomerPhone").innerText = deliveryDetailsForm.customerPhone.value;
+    document.getElementById("showCustomerEmail").innerText = deliveryDetailsForm.customerEmail.value;
+    document.getElementById("showCustomerAddress").innerText = deliveryDetailsForm.customerAddress.value;
+
+    //Hiding and Showing Elements
+    document.getElementById("cart").classList.add("d-none");
+    document.getElementById("customerDetails").classList.add("d-none");
+    document.getElementById("customrInvoice").classList.remove("d-none");
+})
+
+
+// customer details function
+document.getElementById('detailsSubmit').addEventListener('click', function () {
+    let customerName = document.getElementById('customerName').value;
+    document.getElementById('showCustomerName').innerText = customerName;
+});
+
 subtotal();
